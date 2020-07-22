@@ -3,7 +3,7 @@
 namespace Rawilk\Skeleton\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use Rawilk\Skeleton\SkeletonServiceProvider;
+use Rawilk\Skeleton\AppKeyRotatorServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -17,7 +17,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app): array
     {
         return [
-            SkeletonServiceProvider::class,
+            AppKeyRotatorServiceProvider::class,
         ];
     }
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Rawilk\Skeleton\Commands;
+namespace Rawilk\AppKeyRotator\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class RotateAppKeyCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'app-key-rotator:rotate';
 
     public $description = 'My command';
 

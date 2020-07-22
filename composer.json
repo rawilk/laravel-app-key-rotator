@@ -1,22 +1,24 @@
 {
-    "name": "rawilk/:package_name",
-    "description": ":package_description",
+    "name": "rawilk/laravel-app-key-rotator",
+    "description": "Rotate app keys around while re-encrypting data.",
     "keywords": [
         "rawilk",
-        ":package_name"
+        "laravel-app-key-rotator",
+        "app key"
     ],
-    "homepage": "https://github.com/rawilk/:package_name",
+    "homepage": "https://github.com/rawilk/laravel-app-key-rotator",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
+            "name": "Randall Wilk",
+            "email": "wilk.randall@gmail.com",
             "homepage": "https://randallwilk.dev",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^7.4"
+        "php": "^7.4",
+        "illuminate/support": "^6.0|^7.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
@@ -27,12 +29,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Rawilk\\Skeleton\\": "src"
+            "Rawilk\\AppKeyRotator\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Rawilk\\Skeleton\\Tests\\": "tests"
+            "Rawilk\\AppKeyRotator\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -47,11 +49,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Rawilk\\Skeleton\\SkeletonServiceProvider"
-            ],
-            "aliases": {
-                "Skeleton": "Rawilk\\Skeleton\\Facades\\SkeletonFacade"
-            }
+                "Rawilk\\AppKeyRotator\\SkeletonServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
