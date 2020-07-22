@@ -49,7 +49,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Rawilk\\AppKeyRotator\\SkeletonServiceProvider"
+                "Rawilk\\AppKeyRotator\\AppKeyRotatorServiceProvider"
             ]
         }
     },
