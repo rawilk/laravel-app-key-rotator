@@ -1,7 +1,7 @@
 # Laravel App Key Rotator
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/rawilk/laravel-app-key-rotator.svg?style=flat-square)](https://packagist.org/packages/rawilk/laravel-app-key-rotator)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/rawilk/laravel-app-key-rotator/run-tests?label=tests)](https://github.com/rawilk/laravel-app-key-rotator/actions?query=workflow%3Arun-tests+branch%3Amaster)
+![Tests](https://github.com/rawilk/laravel-app-key-rotator/workflows/Tests/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/rawilk/laravel-app-key-rotator.svg?style=flat-square)](https://packagist.org/packages/rawilk/laravel-app-key-rotator)
 
 Changing your `APP_KEY` can be as simple as running `php artisan key:generate`, but what about your encrypted model data? This is where Laravel App Key Rotator comes in. This package can help with generating a new app key for you, as well as decrypting and re-encrypting your model automatically for you through an artisan command.
