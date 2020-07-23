@@ -71,7 +71,7 @@ class RotateAppKeyCommandTest extends TestCase
                     'birth_date',
                     'bank_account',
                 ],
-            ]
+            ],
         ]);
 
         $userValues = [];
@@ -103,7 +103,7 @@ class RotateAppKeyCommandTest extends TestCase
             $bankAccount = $this->appKeyRotator->newEncrypter()->decrypt($user->bank_account);
             $newUserValues = array_merge($user->toArray(), [
                 'birth_date' => $birthDate,
-                'bank_account' => $bankAccount
+                'bank_account' => $bankAccount,
             ]);
 
             $this->assertEquals($userValues[$user->id], $newUserValues);
@@ -119,7 +119,7 @@ class RotateAppKeyCommandTest extends TestCase
                     'birth_date',
                     'bank_account',
                 ],
-            ]
+            ],
         ]);
 
         $userValues = [];
@@ -156,7 +156,7 @@ class RotateAppKeyCommandTest extends TestCase
                     'birth_date',
                     'bank_account',
                 ],
-            ]
+            ],
         ]);
 
         $timestamps = [];
@@ -190,7 +190,7 @@ class RotateAppKeyCommandTest extends TestCase
                     'birth_date',
                     'bank_account',
                 ],
-            ]
+            ],
         ]);
 
         $userValues = [];
