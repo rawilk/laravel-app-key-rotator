@@ -15,6 +15,9 @@ Rotating your app keys is as simple as running this artisan command:
 php artisan app-key-rotator:rotate
 ```
 
+## Documentation
+For more comprehensive documentation, please visit: https://docs.randallwilk.dev/laravel-app-key-rotator
+
 ## Installation
 
 You can install the package via composer:
