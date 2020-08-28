@@ -16,4 +16,5 @@ See this for more information: [https://gist.github.com/themsaid/ef376d7642be69c
 php artisan app-key-rotator:rotate
 ```
 
->{.tip} You should probably make a backup of your `.env` file before running this command and rotating your app key.
+{.tip}
+> You should probably make a backup of your `.env` file before running this command and rotating your app key.
