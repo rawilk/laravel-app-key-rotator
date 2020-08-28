@@ -10,14 +10,14 @@ into the constructor of each action it calls.
 
 Here is what the RotatorAction interface looks like:
 
-<x-code lang="php">
+```php
 namespace Rawilk\AppKeyRotator\Contracts;
 
 interface RotatorAction
 {
     public function handle();
 }
-</x-code>
+```
 
 By default the package has an action for re-encrypting Model values for your models specified in the `models` key.
 If you need to modify that behavior, you should extend the `Rawilk\AppKeyRotator\Actions\ReEncryptModels` action and specify it in the config.
@@ -25,7 +25,7 @@ If you need to modify that behavior, you should extend the `Rawilk\AppKeyRotator
 If you need to perform other actions, such as re-encrypting data in files on your server, you can create additional actions for them.
 Here's an example of a custom action you could create:
 
-<x-code lang="php">
+```php
 namespace App\Actions\AppKeyRotator;
 
 use Rawilk\AppKeyRotator\AppKeyRotator;
@@ -46,4 +46,4 @@ class FileEncrypter implements RotatorAction
         // perform your logic here
     }
 }
-</x-code>
+```

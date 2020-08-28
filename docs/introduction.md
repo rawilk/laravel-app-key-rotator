@@ -12,4 +12,6 @@ happen, such as an employee leaving the company. See more information here: [htt
 
 Rotating your app keys is as simple as running this artisan command:
 
-<x-code lang="bash">php artisan app-key-rotator:rotate</x-code>
+```bash
+php artisan app-key-rotator:rotate
+```

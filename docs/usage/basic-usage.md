@@ -10,8 +10,6 @@ and decrypt values with the previous app key. See this for more information: [ht
 
 ## Command
 
-<x-code lang="bash">php artisan app-key-rotator:rotate</x-code>
+```bashphp artisan app-key-rotator:rotate```
 
-<x-tip>
-    You should probably make a backup of your <code>.env</code> file before running this command and rotating your app key.
-</x-tip>
+>{.tip} You should probably make a backup of your <code>.env</code> file before running this command and rotating your app key.
