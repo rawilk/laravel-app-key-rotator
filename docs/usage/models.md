@@ -3,6 +3,8 @@ title: Models
 sort: 2
 ---
 
+## Introduction
+
 If you have models that need to have data re-encrypted with the new app key, you can specify them in the `models` key in the `config/app-key-rotator.php` config file.
 Specify the model class, and then an array of fields that are encrypted in the database.
 

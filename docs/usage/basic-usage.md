@@ -3,6 +3,8 @@ title: Basic Usage
 sort: 1
 ---
 
+## Introduction
+
 Everything is done via the `app-key-rotator:rotate` artisan command. When the command is ran, it'll modify your `.env` file
 and add `OLD_APP_KEY=your-old-app-key` to it. If something goes wrong with your app key rotation, you can always revert
 back to your old app key from your `.env` file. This is also used in case decryption fails with the new app key; it'll try

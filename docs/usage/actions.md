@@ -3,10 +3,14 @@ title: Actions
 sort: 3
 ---
 
+## Introduction
+
 When the app key is rotated in the artisan command, it can run any actions you define in the `actions` key in the config file.
 Any action you define must implement the `Rawilk\AppKeyRotator\Contracts\RotatorAction` interface. the artisan command automatically
 passes the package config and the instance of the `Rawilk\AppKeyRotator\AppKeyRotator` class, which is what handles re-encrypting values,
 into the constructor of each action it calls.
+
+## Interface
 
 Here is what the RotatorAction interface looks like:
 
@@ -18,6 +22,8 @@ interface RotatorAction
     public function handle();
 }
 ```
+
+## Creating an Action
 
 By default the package has an action for re-encrypting Model values for your models specified in the `models` key.
 If you need to modify that behavior, you should extend the `Rawilk\AppKeyRotator\Actions\ReEncryptModels` action and specify it in the config.

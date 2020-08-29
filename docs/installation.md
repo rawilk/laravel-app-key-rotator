@@ -3,6 +3,8 @@ title: Installation
 sort: 3
 ---
 
+## Installation 
+
 You can install the package via composer:
 
 ```bash
