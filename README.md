@@ -16,7 +16,7 @@ php artisan app-key-rotator:rotate
 ```
 
 ## Documentation
-For more comprehensive documentation, please visit: https://docs.randallwilk.dev/laravel-app-key-rotator
+For more comprehensive documentation, please visit: https://randallwilk.dev/docs/laravel-app-key-rotator
 
 ## Installation
 
