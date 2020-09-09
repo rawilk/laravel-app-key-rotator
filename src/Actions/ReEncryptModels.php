@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Rawilk\AppKeyRotator\Actions;
 
 use Illuminate\Database\Eloquent\Model;

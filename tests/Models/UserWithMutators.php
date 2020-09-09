@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Rawilk\AppKeyRotator\Tests\Models;
 
 use Illuminate\Support\Facades\Crypt;

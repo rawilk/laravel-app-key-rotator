@@ -1,13 +1,25 @@
 <?php
 
-use \Faker\Generator;
+declare(strict_types=1);
 
-/* @var Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(\Rawilk\AppKeyRotator\Tests\Models\User::class, function (Generator $faker) {
-    return [
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'birth_date' => \Illuminate\Support\Facades\Crypt::encrypt($faker->dateTime),
-        'bank_account' => \Illuminate\Support\Facades\Crypt::encrypt($faker->bankAccountNumber),
-    ];
-});
+namespace Rawilk\AppKeyRotator\Tests\Database\Factories;
+
+use Illuminate\Support\Facades\Crypt;
+use Rawilk\AppKeyRotator\Tests\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class UserFactory extends Factory
+{
+    /** @var string */
+    protected $model = User::class;
+
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->name,
+            'email' => $this->faker->email,
+            'birth_date' => Crypt::encrypt($this->faker->dateTime),
+            'bank_account' => Crypt::encrypt($this->faker->bankAccountNumber),
+        ];
+    }
+}

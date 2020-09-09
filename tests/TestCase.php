@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Rawilk\AppKeyRotator\Tests;
 
 use Dotenv\Dotenv;
@@ -7,7 +9,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Encryption\Encrypter;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Rawilk\AppKeyRotator\AppKeyRotatorServiceProvider;
-use Rawilk\AppKeyRotator\Tests\Models\User;
+use Rawilk\AppKeyRotator\Tests\Database\Factories\UserFactory;
 use Rawilk\AppKeyRotator\Tests\Support\TestEncrypter;
 
 class TestCase extends Orchestra
@@ -17,8 +19,6 @@ class TestCase extends Orchestra
         $this->loadEnvironmentVariables();
 
         parent::setUp();
-
-        $this->withFactories(__DIR__ . '/database/factories');
 
         $this->app->useEnvironmentPath(__DIR__ . '/../');
 
@@ -42,6 +42,7 @@ class TestCase extends Orchestra
             $appKey = 'base64:' . base64_encode(
                 Encrypter::generateKey('AES-256-CBC')
             );
+
             file_put_contents(__DIR__ . '/../.env', 'APP_KEY=' . $appKey);
         }
 
@@ -76,6 +77,6 @@ class TestCase extends Orchestra
             $table->timestamps();
         });
 
-        factory(User::class, 5)->create();
+        UserFactory::new()->count(5)->create();
     }
 }
