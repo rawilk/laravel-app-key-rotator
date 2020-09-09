@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Rawilk\AppKeyRotator\Tests\Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Crypt;
 use Rawilk\AppKeyRotator\Tests\Models\User;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserFactory extends Factory
 {
