@@ -16,7 +16,7 @@ php artisan app-key-rotator:rotate
 ```
 
 ## Documentation
-For more comprehensive documentation, please visit: https://randallwilk.dev/docs/laravel-app-key-rotator
+For documentation, please visit: https://randallwilk.dev/docs/laravel-app-key-rotator
 
 ## Installation
 
@@ -74,59 +74,6 @@ return [
 ];
 ```
 
-## Usage
-
-Everything is done via the `app-key-rotator:rotate` artisan command. When the command is ran, it'll modify your `.env` file and add `OLD_APP_KEY=your-old-app-key` to it. If something goes wrong with your app key rotation, you can always revert back to your old app key from your `.env` file. This is also used in case decryption fails with the new app key, it'll try and decrypt values with the previous app key. See this for more information: https://gist.github.com/themsaid/ef376d7642be69c1110a0a49b0beb0ea
-
-It's recommended that you should make a backup of your `.env` file before running this command and rotating your app key.
-
-### Models
-If you have models that need to have data re-encrypted with the new app key, you can specify them in the `models` key in the config file. Specify the model class, and then an array of fields that are encrypted in the database.
-
-```php
-'models' => [
-    \App\User::class => [
-        'birth_date',
-        'bank_account',
-    ],
-    \App\Student::class => [
-        'email',
-    ],
-],
-```
-
-### Actions
-When the app key is rotated in the artisan command, it can run any actions you define in the `actions` key in the config file. Any action you define must implement the `\Rawilk\AppKeyRotator\Contracts\RotatorAction` interface. The artisan command automatically passes the package config and the instance of the `\Rawilk\AppKeyRotator\AppKeyRotator` class, which is what handles re-encrypting values into the constructor of each action it calls.
-
-By default, the package has an action for re-encrypting Model values for your models specified in the `models` key. If you need to modify that behavior, you should extend the `Rawilk\AppKeyRotator\Actions\ReEncryptModels` action and specify it in the config.
-
-If you need to perform other actions, such as re-encrypting data in files on your server, you can create additional actions for them.
-
-```php
-<?php
-
-namespace App\Actions\AppKeyRotator;
-
-use Rawilk\AppKeyRotator\AppKeyRotator;
-use Rawilk\AppKeyRotator\Contracts\RotatorAction;
-
-class FileEncrypter implements RotatorAction
-{
-    protected AppKeyRotator $appKeyRotator;
-
-    public function __construct(array $config, AppKeyRotator $appKeyRotator)
-    {
-        $this->appKeyRotator = $appKeyRotator;    
-    }
-
-    public function handle()
-    {
-        // $this->appKeyRotator->reEncrypt('encrypted value');
-        // perform your logic here.
-    }
-}
-```
-
 ## Testing
 
 ``` bash
@@ -139,7 +86,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
 
 ## Security
 
