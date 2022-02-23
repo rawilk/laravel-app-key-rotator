@@ -3,7 +3,7 @@ title: Installation
 sort: 3
 ---
 
-## Installation 
+## Installation
 
 You can install the package via composer:
 
@@ -12,6 +12,7 @@ composer require rawilk/laravel-app-key-rotator
 ```
 
 ## Configuration
+
 You should publish the config file:
 
 ```bash
