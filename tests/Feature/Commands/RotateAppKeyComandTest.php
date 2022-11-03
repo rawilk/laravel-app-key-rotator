@@ -5,11 +5,11 @@ declare(strict_types=1);
 use Carbon\Carbon;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Jackiedo\DotenvEditor\DotenvEditor;
+use function Pest\Laravel\artisan;
 use Rawilk\AppKeyRotator\AppKeyRotator;
 use Rawilk\AppKeyRotator\Tests\Models\User;
 use Rawilk\AppKeyRotator\Tests\Models\UserWithAccessors;
 use Rawilk\AppKeyRotator\Tests\Models\UserWithMutators;
-use function Pest\Laravel\artisan;
 
 beforeEach(function () {
     $this->dotEnv = new DotenvEditor(
