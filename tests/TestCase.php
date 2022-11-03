@@ -7,6 +7,7 @@ namespace Rawilk\AppKeyRotator\Tests;
 use Dotenv\Dotenv;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Encryption\Encrypter;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Rawilk\AppKeyRotator\AppKeyRotatorServiceProvider;
 use Rawilk\AppKeyRotator\Tests\Database\Factories\UserFactory;
@@ -14,6 +15,8 @@ use Rawilk\AppKeyRotator\Tests\Support\TestEncrypter;
 
 class TestCase extends Orchestra
 {
+    use LazilyRefreshDatabase;
+
     protected function setUp(): void
     {
         $this->loadEnvironmentVariables();
@@ -53,13 +56,6 @@ class TestCase extends Orchestra
 
     public function getEnvironmentSetUp($app)
     {
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
-            'driver' => 'sqlite',
-            'database' => ':memory:',
-            'prefix' => '',
-        ]);
-
         $app['encrypter'] = new TestEncrypter(
             base64_decode(substr($app['config']['app.key'], 7)),
             $app['config']['app.cipher']
