@@ -35,6 +35,6 @@ return [
      * through the constructor as well.
      */
     'actions' => [
-        \Rawilk\AppKeyRotator\Actions\ReEncryptModels::class, # a custom model re-encrypter should extend this class
+        \Rawilk\AppKeyRotator\Actions\ReEncryptModels::class, // a custom model re-encrypter should extend this class
     ],
 ];

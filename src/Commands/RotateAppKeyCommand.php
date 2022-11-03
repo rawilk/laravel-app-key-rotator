@@ -15,8 +15,11 @@ class RotateAppKeyCommand extends Command
     public $description = 'My command';
 
     protected ?string $oldAppKey;
+
     protected string $newAppKey;
+
     protected DotenvEditor $dotEnv;
+
     protected AppKeyRotator $appKeyRotator;
 
     public function handle(): void

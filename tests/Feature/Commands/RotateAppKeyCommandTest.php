@@ -19,6 +19,7 @@ class RotateAppKeyCommandTest extends TestCase
     use RefreshDatabase;
 
     protected DotenvEditor $dotEnv;
+
     protected AppKeyRotator $appKeyRotator;
 
     protected function setUp(): void

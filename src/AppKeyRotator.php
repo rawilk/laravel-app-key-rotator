@@ -10,8 +10,11 @@ use Illuminate\Support\Str;
 class AppKeyRotator
 {
     protected string $oldAppKey;
+
     protected string $newAppKey;
+
     protected Encrypter $oldEncrypter;
+
     protected Encrypter $newEncrypter;
 
     public function __construct(string $oldAppKey = '', string $newAppKey = '')

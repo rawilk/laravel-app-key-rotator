@@ -12,7 +12,9 @@ use Rawilk\AppKeyRotator\Contracts\RotatorAction;
 class ReEncryptModels implements RotatorAction
 {
     protected array $models;
+
     protected int $chunkSize;
+
     protected AppKeyRotator $appKeyRotator;
 
     public function __construct(array $config, AppKeyRotator $appKeyRotator)
@@ -35,8 +37,7 @@ class ReEncryptModels implements RotatorAction
             ->select(array_merge(['id'], $fields))
             ->chunk(
                 $this->chunkSize,
-                fn (Collection $models)
-                    => $models->each(fn (Model $m) => $this->reEncryptModelInstance($m, $fields))
+                fn (Collection $models) => $models->each(fn (Model $m) => $this->reEncryptModelInstance($m, $fields))
             );
     }
 
