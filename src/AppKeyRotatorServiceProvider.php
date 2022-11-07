@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Rawilk\AppKeyRotator;
 
+use Illuminate\Container\Container;
 use Illuminate\Support\Str;
 use Rawilk\AppKeyRotator\Actions\ActionsCollection;
 use Rawilk\AppKeyRotator\Actions\RotateKeyAction;
@@ -29,8 +30,8 @@ final class AppKeyRotatorServiceProvider extends PackageServiceProvider
     {
         // We'll use our custom Encrypter to allow for decrypting with the previous app key in case
         // using the current key fails.
-        $this->app->singleton('encrypter', function ($app) {
-            $config = $app->make('config')->get('app');
+        $this->app->singleton('encrypter', function () {
+            $config = fn () => Container::getInstance()->make('config')['app'];
 
             if (Str::startsWith($key = $config['key'], 'base64:')) {
                 $key = base64_decode(substr($key, 7));
