@@ -23,10 +23,6 @@ it('saves the new app key in the env file', function () {
     );
     $dotEnv->load($this->envPath);
 
-    dump("old={$currentKey}");
-    dump("new={$newKey}");
-    dump($dotEnv->getContent());
-
     expect($this->envPath)->toBeReadableFile()
         ->and($dotEnv->getValue('APP_KEY'))->not()->toEqual($currentKey)
         ->and($dotEnv->getValue('APP_KEY'))->toEqual($newKey);

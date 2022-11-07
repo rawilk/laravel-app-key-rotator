@@ -54,13 +54,11 @@ class TestCase extends Orchestra
             file_put_contents("{$this->basePath}/composer.lock", file_get_contents(__DIR__ . '/../composer.lock'));
         }
 
-        if (! file_exists($this->envPath)) {
-            $appKey = 'base64:' . base64_encode(
-                Encrypter::generateKey('AES-256-CBC')
-            );
+        $appKey = 'base64:' . base64_encode(
+            Encrypter::generateKey('AES-256-CBC')
+        );
 
-            file_put_contents($this->envPath, 'APP_KEY=' . $appKey);
-        }
+        file_put_contents($this->envPath, 'APP_KEY=' . $appKey);
     }
 
     public function getEnvironmentSetUp($app)

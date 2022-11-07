@@ -19,7 +19,6 @@ class RotateAppKeyCommand extends Command
     public function handle(ActionsCollection $actions): void
     {
         $keys = app(RotateKeyAction::class)();
-        dump($keys);
 
         $appKeyRotator = new AppKeyRotator($keys['old'], $keys['new']);
         $config = config('app-key-rotator');
