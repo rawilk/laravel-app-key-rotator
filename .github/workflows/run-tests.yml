@@ -42,7 +42,9 @@ jobs:
                     echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
             -   name: Install dependencies
-                run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+                run: |
+                    composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+                    composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
             -   name: Copy composer lock to orchestra
                 run: cp composer.lock vendor/orchestra/testbench-core/laravel/composer.lock
