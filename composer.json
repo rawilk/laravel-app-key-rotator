@@ -43,6 +43,7 @@
     },
     "scripts": {
         "post-autoload-dump": [
+            "cp composer.lock vendor/orchestra/testbench-core/composer.lock",
             "@php ./vendor/bin/testbench package:discover --ansi"
         ],
         "test": "vendor/bin/pest -p",

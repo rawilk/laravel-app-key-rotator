@@ -50,7 +50,9 @@ class TestCase extends Orchestra
          * We need to ensure a composer lock file is present in the "base" path so the DotenvEditor package
          * can find it and be able to check for our installed version of the `vlucas/phpdotenv` package.
          */
-        file_put_contents("{$this->basePath}/composer.lock", file_get_contents(__DIR__ . '/../composer.lock'));
+        if (! file_exists("{$this->basePath}/composer.lock")) {
+            file_put_contents("{$this->basePath}/composer.lock", file_get_contents(__DIR__ . '/../composer.lock'));
+        }
 
         if (! file_exists($this->envPath)) {
             $appKey = 'base64:' . base64_encode(
