@@ -26,7 +26,7 @@ class ReEncryptModels implements RotatorAction
         $modelClass::query()
             ->select(['id', ...$encryptedProperties])
             ->cursor()
-            ->each(function (Model $model) use ($modelClass, $appKeyRotator, $encryptedProperties) {
+            ->each(function (Model $model) use ($appKeyRotator, $encryptedProperties) {
                 // We get the attributes here to prevent any accessors or mutators from trying to
                 // encrypt/decrypt values with the wrong encryption keys.
                 $attributes = $model->getAttributes();
@@ -44,7 +44,7 @@ class ReEncryptModels implements RotatorAction
     }
 
     /**
-     * @param array $models
+     * @param  array  $models
      * @return \Illuminate\Support\Collection<int, \Rawilk\AppKeyRotator\Contracts\ReEncryptsData>
      */
     protected function getModels(array $models): Collection

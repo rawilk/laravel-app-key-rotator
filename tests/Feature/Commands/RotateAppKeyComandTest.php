@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use Jackiedo\DotenvEditor\DotenvEditor;
-use Rawilk\AppKeyRotator\Exceptions\AppKeyNotSetException;
 use function Pest\Laravel\artisan;
+use Rawilk\AppKeyRotator\Exceptions\AppKeyNotSetException;
 
 beforeEach(function () {
     $this->dotEnv = new DotenvEditor(

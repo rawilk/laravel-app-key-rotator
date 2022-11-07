@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Encryption\Encrypter;
+use function Pest\Laravel\artisan;
 use Rawilk\AppKeyRotator\Actions\ReEncryptModels;
 use Rawilk\AppKeyRotator\Tests\Models\User;
 use Rawilk\AppKeyRotator\Tests\Models\UserWithAccessors;
 use Rawilk\AppKeyRotator\Tests\Models\UserWithMutators;
-use function Pest\Laravel\artisan;
 
 beforeEach(function () {
     setUpDatabase();
@@ -68,7 +68,7 @@ it('re-encrypts model values with accessors that decrypt automatically', functio
 it('re-encrypts when models have mutators that encrypt automatically', function (UserWithMutators $user) {
     config([
         'app-key-rotator.actions' => [ReEncryptModels::class],
-        'app-key-rotator.models' => [UserWithMutators::class,],
+        'app-key-rotator.models' => [UserWithMutators::class],
     ]);
 
     $birthDate = $user->birth_date;

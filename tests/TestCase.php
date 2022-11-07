@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Rawilk\AppKeyRotator\Tests;
 
-use Dotenv\Dotenv;
 use Illuminate\Encryption\Encrypter;
 use Jackiedo\DotenvEditor\DotenvEditorServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
