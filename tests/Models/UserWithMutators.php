@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace Rawilk\AppKeyRotator\Tests\Models;
 
-use Illuminate\Support\Facades\Crypt;
+use Rawilk\AppKeyRotator\Tests\Database\Factories\UserWithMutatorsFactory;
 
 class UserWithMutators extends UserWithAccessors
 {
+    protected static function newFactory()
+    {
+        return new UserWithMutatorsFactory;
+    }
+
     public function setBirthDateAttribute($birthDate): void
     {
         $this->attributes['birth_date'] = $this->encryptValue($birthDate);
@@ -20,6 +25,6 @@ class UserWithMutators extends UserWithAccessors
 
     protected function encryptValue($value): string
     {
-        return Crypt::encrypt($value);
+        return encrypt($value);
     }
 }

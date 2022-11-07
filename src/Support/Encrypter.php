@@ -6,6 +6,7 @@ namespace Rawilk\AppKeyRotator\Support;
 
 use Illuminate\Encryption\Encrypter as BaseEncrypter;
 use Illuminate\Support\Str;
+use Throwable;
 
 class Encrypter extends BaseEncrypter
 {
@@ -13,7 +14,7 @@ class Encrypter extends BaseEncrypter
     {
         try {
             return parent::decrypt($payload, $unserialize);
-        } catch (\Throwable $e) {
+        } catch (Throwable) {
             $currentKey = $this->key;
 
             $this->key = Str::startsWith(config('app-key-rotator.old_app_key'), 'base64:')

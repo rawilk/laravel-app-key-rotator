@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace Rawilk\AppKeyRotator\Tests\Models;
 
-use Illuminate\Support\Facades\Crypt;
+use Rawilk\AppKeyRotator\Tests\Database\Factories\UserWithAccessorsFactory;
 
 class UserWithAccessors extends User
 {
     protected $table = 'users';
+
+    protected static function newFactory()
+    {
+        return new UserWithAccessorsFactory;
+    }
 
     public function getBirthDateAttribute($birthDate)
     {
@@ -22,6 +27,6 @@ class UserWithAccessors extends User
 
     protected function decryptValue($value)
     {
-        return $value ? Crypt::decrypt($value) : $value;
+        return $value ? decrypt($value) : $value;
     }
 }

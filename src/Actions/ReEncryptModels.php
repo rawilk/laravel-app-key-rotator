@@ -7,54 +7,53 @@ namespace Rawilk\AppKeyRotator\Actions;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Rawilk\AppKeyRotator\AppKeyRotator;
+use Rawilk\AppKeyRotator\Contracts\ReEncryptsData;
 use Rawilk\AppKeyRotator\Contracts\RotatorAction;
 
 class ReEncryptModels implements RotatorAction
 {
-    protected array $models;
-
-    protected int $chunkSize;
-
-    protected AppKeyRotator $appKeyRotator;
-
-    public function __construct(array $config, AppKeyRotator $appKeyRotator)
+    public function handle(AppKeyRotator $appKeyRotator, array $config): void
     {
-        $this->models = $config['models'] ?? [];
-        $this->chunkSize = $config['model_chunk_size'] ?? 500;
-        $this->appKeyRotator = $appKeyRotator;
+        $models = $this->getModels($config['models'] ?? []);
+
+        $models->each(fn (string $model) => $this->reEncryptModel($model, $appKeyRotator));
     }
 
-    public function handle(): void
+    protected function reEncryptModel(string $modelClass, AppKeyRotator $appKeyRotator): void
     {
-        foreach ($this->models as $modelClass => $fields) {
-            $this->reEncryptModel($modelClass, $fields);
-        }
+        $encryptedProperties = $modelClass::make()->encryptedProperties();
+
+        $modelClass::query()
+            ->select(['id', ...$encryptedProperties])
+            ->cursor()
+            ->each(function (Model $model) use ($modelClass, $appKeyRotator, $encryptedProperties) {
+                // We get the attributes here to prevent any accessors or mutators from trying to
+                // encrypt/decrypt values with the wrong encryption keys.
+                $attributes = $model->getAttributes();
+
+                foreach ($encryptedProperties as $field) {
+                    $attributes[$field] = $appKeyRotator->reEncrypt($attributes[$field]);
+                }
+
+                $model->setRawAttributes($attributes);
+
+                $model->timestamps = false;
+
+                $model->saveQuietly();
+            });
     }
 
-    protected function reEncryptModel(string $modelClass, array $fields): void
+    /**
+     * @param array $models
+     * @return \Illuminate\Support\Collection<int, \Rawilk\AppKeyRotator\Contracts\ReEncryptsData>
+     */
+    protected function getModels(array $models): Collection
     {
-        app($modelClass)
-            ->select(array_merge(['id'], $fields))
-            ->chunk(
-                $this->chunkSize,
-                fn (Collection $models) => $models->each(fn (Model $m) => $this->reEncryptModelInstance($m, $fields))
-            );
-    }
+        return collect($models)
+            ->filter(function (string $model) {
+                $instance = app($model);
 
-    protected function reEncryptModelInstance(Model $model, array $fields): void
-    {
-        // We get the attributes here to prevent any accessors or mutators from trying to
-        // encrypt/decrypt values with the wrong encryption keys.
-        $attributes = $model->getAttributes();
-
-        foreach ($fields as $field) {
-            $attributes[$field] = $this->appKeyRotator->reEncrypt($attributes[$field]);
-        }
-
-        $model->setRawAttributes($attributes);
-
-        $model->timestamps = false;
-
-        $model->save();
+                return $instance instanceof ReEncryptsData;
+            });
     }
 }

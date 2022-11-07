@@ -4,27 +4,32 @@ declare(strict_types=1);
 
 namespace Rawilk\AppKeyRotator;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Rawilk\AppKeyRotator\Actions\ActionsCollection;
+use Rawilk\AppKeyRotator\Actions\RotateKeyAction;
 use Rawilk\AppKeyRotator\Commands\RotateAppKeyCommand;
 use Rawilk\AppKeyRotator\Support\Encrypter;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class AppKeyRotatorServiceProvider extends ServiceProvider
+/** @internal */
+final class AppKeyRotatorServiceProvider extends PackageServiceProvider
 {
-    public function boot(): void
+    public function configurePackage(Package $package): void
     {
-        if ($this->app->runningInConsole()) {
-            $this->bootForConsole();
-        }
+        $package
+            ->name('laravel-app-key-rotator')
+            ->hasConfigFile()
+            ->hasCommands([
+                RotateAppKeyCommand::class,
+            ]);
     }
 
-    public function register(): void
+    public function packageRegistered(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/app-key-rotator.php', 'app-key-rotator');
-
         // We'll use our custom Encrypter to allow for decrypting with the previous app key in case
         // using the current key fails.
-        $this->app->singleton('encrypter', static function ($app) {
+        $this->app->singleton('encrypter', function ($app) {
             $config = $app->make('config')->get('app');
 
             if (Str::startsWith($key = $config['key'], 'base64:')) {
@@ -33,16 +38,15 @@ class AppKeyRotatorServiceProvider extends ServiceProvider
 
             return new Encrypter($key, $config['cipher']);
         });
-    }
 
-    protected function bootForConsole(): void
-    {
-        $this->publishes([
-            __DIR__ . '/../config/app-key-rotator.php' => config_path('app-key-rotator.php'),
-        ], 'config');
+        $this->app->singleton(ActionsCollection::class, function ($app) {
+            $actionClassNames = $app['config']->get('app-key-rotator.actions', []) ?? [];
 
-        $this->commands([
-            RotateAppKeyCommand::class,
-        ]);
+            return new ActionsCollection($actionClassNames);
+        });
+
+        $this->app->singleton(RotateKeyAction::class, function ($app) {
+            return new RotateKeyAction($app['dotenv-editor']);
+        });
     }
 }

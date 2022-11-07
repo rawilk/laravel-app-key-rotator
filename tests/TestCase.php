@@ -5,53 +5,61 @@ declare(strict_types=1);
 namespace Rawilk\AppKeyRotator\Tests;
 
 use Dotenv\Dotenv;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Encryption\Encrypter;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Jackiedo\DotenvEditor\DotenvEditorServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Rawilk\AppKeyRotator\AppKeyRotatorServiceProvider;
-use Rawilk\AppKeyRotator\Tests\Database\Factories\UserFactory;
 use Rawilk\AppKeyRotator\Tests\Support\TestEncrypter;
 
 class TestCase extends Orchestra
 {
-    use LazilyRefreshDatabase;
+    /**
+     * This is where our "app" lives in testbench tests.
+     */
+    protected string $basePath;
+
+    /**
+     * The path to our .env file for our tests.
+     */
+    protected string $envPath;
 
     protected function setUp(): void
     {
+        $this->basePath = __DIR__ . '/../vendor/orchestra/testbench-core/laravel';
+        $this->envPath = "{$this->basePath}/.env";
+
         $this->loadEnvironmentVariables();
 
         parent::setUp();
 
-        $this->app->useEnvironmentPath(__DIR__ . '/../');
-
         if (! config('app.key')) {
             $this->artisan('key:generate');
         }
-
-        $this->setupDatabase($this->app);
     }
 
     protected function getPackageProviders($app): array
     {
         return [
+            DotenvEditorServiceProvider::class,
             AppKeyRotatorServiceProvider::class,
         ];
     }
 
     protected function loadEnvironmentVariables(): void
     {
-        if (! file_exists(__DIR__ . '/../.env')) {
+        /*
+         * We need to ensure a composer lock file is present in the "base" path so the DotenvEditor package
+         * can find it and be able to check for our installed version of the `vlucas/phpdotenv` package.
+         */
+        file_put_contents("{$this->basePath}/composer.lock", file_get_contents(__DIR__ . '/../composer.lock'));
+
+        if (! file_exists($this->envPath)) {
             $appKey = 'base64:' . base64_encode(
                 Encrypter::generateKey('AES-256-CBC')
             );
 
-            file_put_contents(__DIR__ . '/../.env', 'APP_KEY=' . $appKey);
+            file_put_contents($this->envPath, 'APP_KEY=' . $appKey);
         }
-
-        $dotEnv = Dotenv::createImmutable(__DIR__ . '/..');
-
-        $dotEnv->load();
     }
 
     public function getEnvironmentSetUp($app)
@@ -60,19 +68,5 @@ class TestCase extends Orchestra
             base64_decode(substr($app['config']['app.key'], 7)),
             $app['config']['app.cipher']
         );
-    }
-
-    protected function setupDatabase($app): void
-    {
-        $app['db']->connection()->getSchemaBuilder()->create('users', static function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('email');
-            $table->string('birth_date')->nullable();
-            $table->string('bank_account')->nullable();
-            $table->timestamps();
-        });
-
-        UserFactory::new()->count(5)->create();
     }
 }

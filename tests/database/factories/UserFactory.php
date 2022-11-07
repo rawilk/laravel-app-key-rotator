@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Rawilk\AppKeyRotator\Tests\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Crypt;
 use Rawilk\AppKeyRotator\Tests\Models\User;
 
 class UserFactory extends Factory
@@ -16,10 +15,10 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
-            'email' => $this->faker->email,
-            'birth_date' => Crypt::encrypt($this->faker->dateTime),
-            'bank_account' => Crypt::encrypt($this->faker->bankAccountNumber),
+            'name' => fake()->name(),
+            'email' => fake()->email(),
+            'birth_date' => encrypt(fake()->dateTime()),
+            'bank_account' => encrypt(fake()->creditCardNumber()),
         ];
     }
 }
