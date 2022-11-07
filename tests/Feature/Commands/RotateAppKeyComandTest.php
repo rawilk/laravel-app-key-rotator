@@ -6,13 +6,6 @@ use Jackiedo\DotenvEditor\DotenvEditor;
 use function Pest\Laravel\artisan;
 use Rawilk\AppKeyRotator\Exceptions\AppKeyNotSetException;
 
-beforeEach(function () {
-    $this->dotEnv = new DotenvEditor(
-        $this->app,
-        $this->app['config'],
-    );
-});
-
 it('saves the new app key in the env file', function () {
     config([
         'app-key-rotator.actions' => [],
@@ -24,12 +17,19 @@ it('saves the new app key in the env file', function () {
 
     $newKey = config('app.key');
 
-    $this->dotEnv->load($this->envPath);
+    $dotEnv = new DotenvEditor(
+        $this->app,
+        $this->app['config'],
+    );
+    $dotEnv->load($this->envPath);
 
-    expect($this->dotEnv->getValue('APP_KEY'))->not()->toEqual($currentKey)
-        ->and($this->dotEnv->getValue('APP_KEY'))->toBe($newKey);
+    dump($this->envPath);
 
-    $envContent = $this->dotEnv->getContent();
+    expect($this->envPath)->toBeReadableFile()
+        ->and($dotEnv->getValue('APP_KEY'))->not()->toEqual($currentKey)
+        ->and($dotEnv->getValue('APP_KEY'))->toBe($newKey);
+
+    $envContent = $dotEnv->getContent();
 
     $this->assertStringContainsString(
         "APP_KEY={$newKey}",
