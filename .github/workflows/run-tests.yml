@@ -45,7 +45,7 @@ jobs:
                 run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
             -   name: Copy composer lock to orchestra
-                run: cp composer.lock vendor/orchestra/testbench-core/composer.lock
+                run: cp composer.lock vendor/orchestra/testbench-core/laravel/composer.lock
 
             -   name: Discover packages
                 run: php ./vendor/bin/testbench package:discover --ansi
