@@ -47,32 +47,4 @@ class AppKeyRotator
 
         return $key;
     }
-
-    /*
-     * These methods are for testing purposes.
-     */
-
-    public function setOldAppKey(string $oldAppKey): self
-    {
-        $this->oldAppKey = $this->normalizeKey($oldAppKey);
-
-        return $this;
-    }
-
-    public function setNewAppKey(string $newAppKey): self
-    {
-        $this->newAppKey = $this->normalizeKey($newAppKey);
-
-        return $this;
-    }
-
-    public function oldEncrypter(): Encrypter
-    {
-        return $this->oldEncrypter;
-    }
-
-    public function newEncrypter(): Encrypter
-    {
-        return $this->newEncrypter;
-    }
 }
