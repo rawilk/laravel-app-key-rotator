@@ -11,6 +11,7 @@ All notable changes to `laravel-app-key-rotator` will be documented in this file
 - Bump creyD/prettier_action from 3.0 to 4.2 by @dependabot in https://github.com/rawilk/laravel-app-key-rotator/pull/4
 - App key rotation now performed from dedicated action class instead of directly in the command
 - Custom actions now support custom arguments to be passed into their constructors
+- `cursor()` is now used instead of `chunk()` in default model re-encryption action
 
 ### Breaking Changes
 
