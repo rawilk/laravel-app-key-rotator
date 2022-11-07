@@ -13,6 +13,7 @@ Changing your `APP_KEY` can be as simple as running `php artisan key:generate`, 
 It's also generally a good practice to rotate your app keys periodically (e.g. every 6 months) or when certain events happen, such as an employee leaving the company. See more information here: https://tighten.co/blog/app-key-and-you/
 
 ## Basic Usage
+
 Rotating your app keys is as simple as running this artisan command:
 
 ```bash
@@ -28,6 +29,7 @@ composer require rawilk/laravel-app-key-rotator
 ```
 
 You can publish the config file with:
+
 ```bash
 php artisan vendor:publish --tag="app-key-rotator-config"
 ```
@@ -35,11 +37,12 @@ php artisan vendor:publish --tag="app-key-rotator-config"
 You can view the default configuration file here: https://github.com/rawilk/laravel-app-key-rotator/blob/main/config/app-key-rotator.php
 
 ## Documentation
+
 For documentation, please visit: https://randallwilk.dev/docs/laravel-app-key-rotator
 
 ## Testing
 
-``` bash
+```bash
 composer test
 ```
 
@@ -57,8 +60,8 @@ If you discover any security related issues, please email randall@randallwilk.de
 
 ## Credits
 
-- [Randall Wilk](https://github.com/rawilk)
-- [All Contributors](../../contributors)
+-   [Randall Wilk](https://github.com/rawilk)
+-   [All Contributors](../../contributors)
 
 ## License
 
