@@ -30,10 +30,6 @@ class TestCase extends Orchestra
         $this->loadEnvironmentVariables();
 
         parent::setUp();
-
-        if (! config('app.key')) {
-            $this->artisan('key:generate');
-        }
     }
 
     protected function getPackageProviders($app): array
