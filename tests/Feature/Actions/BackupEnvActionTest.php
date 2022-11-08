@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\File;
 use Jackiedo\DotenvEditor\DotenvEditor;
-use Rawilk\AppKeyRotator\Actions\BackupEnvAction;
 use function Pest\Laravel\artisan;
+use Rawilk\AppKeyRotator\Actions\BackupEnvAction;
 
 beforeEach(function () {
     config([
