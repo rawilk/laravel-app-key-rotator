@@ -7,7 +7,7 @@ namespace Rawilk\AppKeyRotator\Actions;
 use Illuminate\Support\Collection;
 
 /** @internal */
-final class ActionsCollection extends Collection
+class ActionsCollection extends Collection
 {
     public function __construct($actionClassNames)
     {
