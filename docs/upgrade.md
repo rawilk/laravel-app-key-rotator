@@ -3,6 +3,14 @@ title: Upgrade Guide
 sort: 4
 ---
 
+## Upgrade from v3 to v3.1.0
+
+### Config
+A new `before_actions` key has been added to the config, along with a new `BackupEnvAction`. Add this to your published config if you are planning on running actions before
+the `.env` file is modified.
+
+For more information, see: [Before Actions](/docs/laravel-app-key-rotator/{version}/usage/actions#user-content-before-actions)
+
 ## Upgrade from v2 to v3
 
 ### PHP Version
