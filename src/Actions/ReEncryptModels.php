@@ -44,7 +44,6 @@ class ReEncryptModels implements RotatorAction
     }
 
     /**
-     * @param  array  $models
      * @return \Illuminate\Support\Collection<int, \Rawilk\AppKeyRotator\Contracts\ReEncryptsData>
      */
     protected function getModels(array $models): Collection
