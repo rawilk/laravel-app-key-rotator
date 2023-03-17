@@ -1,4 +1,4 @@
-# Laravel App Key Rotator
+# App Key Rotator for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/rawilk/laravel-app-key-rotator.svg?style=flat-square)](https://packagist.org/packages/rawilk/laravel-app-key-rotator)
 ![Tests](https://github.com/rawilk/laravel-app-key-rotator/workflows/Tests/badge.svg)
@@ -62,6 +62,10 @@ If you discover any security related issues, please email randall@randallwilk.de
 
 -   [Randall Wilk](https://github.com/rawilk)
 -   [All Contributors](../../contributors)
+
+## Disclaimer
+
+This package is not affiliated with, maintained, authorized, endorsed or sponsored by Laravel or any of its affiliates.
 
 ## License
 
