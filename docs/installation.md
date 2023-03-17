@@ -8,7 +8,7 @@ sort: 3
 You can install the package via composer:
 
 ```bash
-composer require rawilk/laravel-app-key-rotator
+composer require rawilk/laravel-app-key-rotator:2.0
 ```
 
 ## Configuration
