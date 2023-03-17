@@ -121,6 +121,7 @@ interface BeforeRotatorAction
 It's very similar to the `RotatorAction`, however it only accepts the package config in the `handle` method since the app key will not have been rotated yet. Also, like the regular actions, you may accept parameters in the constructor of your before actions.
 
 ## Backup Env Action
+
 As of version `3.1.0` this is a pre-defined action that will run in the `before_actions`. It will create a backup of your `.env` file before our package modifies it. The action accepts a `filename` parameter from the config, so you will be able to customize where that backup is saved to, relative to the root of your application. It is defaulted to `.env.backup`, but you are able to change that name according to your needs.
 
 You can also define the filename in your `.env` file under the `ENV_BACKUP_FILENAME` key if you wish.
