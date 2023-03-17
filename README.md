@@ -1,8 +1,10 @@
-# Laravel App Key Rotator
+# App Key Rotator for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/rawilk/laravel-app-key-rotator.svg?style=flat-square)](https://packagist.org/packages/rawilk/laravel-app-key-rotator)
 ![Tests](https://github.com/rawilk/laravel-app-key-rotator/workflows/Tests/badge.svg)
 [![Total Downloads](https://img.shields.io/packagist/dt/rawilk/laravel-app-key-rotator.svg?style=flat-square)](https://packagist.org/packages/rawilk/laravel-app-key-rotator)
+
+![Social image](https://banners.beyondco.de/laravel-app-key-rotator.png?theme=light&packageManager=composer+require&packageName=rawilk%2Flaravel-app-key-rotator&pattern=endlessClouds&style=style_1&description=Rotate+app+keys+around+while+re-encrypting+data.&md=1&showWatermark=0&fontSize=100px&images=refresh)
 
 Changing your `APP_KEY` can be as simple as running `php artisan key:generate`, but what about your encrypted model data? This is where Laravel App Key Rotator comes in. This package can help with generating a new app key for you, as well as decrypting and re-encrypting your model automatically for you through an artisan command.
 
@@ -23,7 +25,7 @@ For more comprehensive documentation, please visit: https://randallwilk.dev/docs
 You can install the package via composer:
 
 ```bash
-composer require rawilk/laravel-app-key-rotator
+composer require rawilk/laravel-app-key-rotator:1.0
 ```
 
 You can publish the config file with:
@@ -149,6 +151,10 @@ If you discover any security related issues, please email randall@randallwilk.de
 
 - [Randall Wilk](https://github.com/rawilk)
 - [All Contributors](../../contributors)
+
+## Disclaimer
+
+This package is not affiliated with, maintained, authorized, endorsed or sponsored by Laravel or any of its affiliates.
 
 ## License
 

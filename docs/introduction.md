@@ -15,3 +15,7 @@ Rotating your app keys is as simple as running this artisan command:
 ```bash
 php artisan app-key-rotator:rotate
 ```
+
+## Disclaimer
+
+This package is not affiliated with, maintained, authorized, endorsed or sponsored by Laravel or any of its affiliates.
