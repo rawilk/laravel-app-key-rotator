@@ -3,8 +3,9 @@
 declare(strict_types=1);
 
 use Jackiedo\DotenvEditor\DotenvEditor;
-use function Pest\Laravel\artisan;
 use Rawilk\AppKeyRotator\Exceptions\AppKeyNotSetException;
+
+use function Pest\Laravel\artisan;
 
 it('saves the new app key in the env file', function () {
     config([

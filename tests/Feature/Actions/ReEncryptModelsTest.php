@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Encryption\Encrypter;
-use function Pest\Laravel\artisan;
 use Rawilk\AppKeyRotator\Actions\ReEncryptModels;
 use Rawilk\AppKeyRotator\Tests\Models\User;
 use Rawilk\AppKeyRotator\Tests\Models\UserWithAccessors;
 use Rawilk\AppKeyRotator\Tests\Models\UserWithMutators;
+
+use function Pest\Laravel\artisan;
 
 beforeEach(function () {
     setUpDatabase();
